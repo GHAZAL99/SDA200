@@ -21,8 +21,7 @@ _Note: The method above applies to all the steps below._
 
 2.	Use the **p20 micropipette**, set at **3 µL** to inject water in the **INLET** of the device. Keep injecting water (you can press beyond the first stop) till the water reaches the **first mark** following the inlet. *Look at the image below to see the correct amount of water needed.*                          
 __*Note: Make sure no air is present at the inlet area.*__
->![Water filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%201.jpg?token=AHPXAYI6ZYIMMGH7JKAO4D25OAOAW)
-![Test](SDA 200 1.jpg)
+>![Water filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%201.jpg?token=AHPXAYI6ZYIMMGH7JKAO4D25OAOAW)    
 
 3.  Use the **p200 micropipette**, set at **50 µL**, to inject **Crystal Violet** in the **INLET** of the device. To do so, press the micropipette to the first stop, and keep pressing till the CV/water fills all the chambers and before it gets into the outlet area.
 >![Dye filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%202.jpg?token=AHPXAYOMW7LASDG5POCJFHC5OAN6U)
