@@ -184,29 +184,8 @@ def aver_ch_intensity(centerx, centery, radius, pixelarray, bgintensity):
     averageIntens = sumIntens / size
     return averageIntens
 
-
-#Use the following test function to check the RGB values of specific chambers
-def aver_ch_intensity3(centerx, centery, radius, pixelarray):
-    circle = select_circle(centerx, centery, radius)
-    listRGB = pixelarray
-    intensityList = []
-    for pixel in circle:
-        colorRGB = listRGB[pixel[1]][pixel[0]]
-            ###YOU SHOULD ADD A THRESHOLD HERE
-        print(colorRGB)
-        intensity = colorRGB[0] + colorRGB[1] + colorRGB[2]
-        intensityList.append(intensity)
-    size = len(intensityList)
-    sumIntens = 0
-    for intens in intensityList:
-        sumIntens += intens
-    if size == 0:
-        size = 1
-    averageIntens = sumIntens / size
-    return averageIntens
-
-
-def draw_centers(listcenters, image, bgloc, pathx):
+#Draws the cirle
+def draw_centers(listcenters, image, bgloc, pathx, bgradius, chamberradius):
     while True:
         try:
             device = Image.open(file_name)
@@ -219,8 +198,8 @@ def draw_centers(listcenters, image, bgloc, pathx):
     d.point(listcenters, fill= "BLACK")
     for center in listcenters:
         d.text(((center[0] - 25), (center[1] - 25)), str(chambern),fill = 50)
-        d.ellipse(((center[0] - 5), (center[1] - 5), (center[0] + 5), (center[1] + 5)), fill = 128)
-        d.ellipse(((center[0]-bgloc - 2), (center[1]+bgloc - 2), (center[0]-bgloc + 2), (center[1]+bgloc + 2)), fill = 128)
+        d.ellipse(((center[0] - chamberradius), (center[1] - chamberradius), (center[0] + chamberradius), (center[1] + chamberradius)), fill = 128)
+        d.ellipse(((center[0]-bgloc - bgradius), (center[1]+bgloc - bgradius), (center[0]-bgloc + bgradius), (center[1]+bgloc + bgradius)), fill = 128)
         chambern += 1
     device.show()
     device.save(pathx + "Samples.jpg")
@@ -340,11 +319,10 @@ def main():
     dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Intensity")
     dataFrame.set_index("Chamber",inplace=True, drop=True)
     pathx = str(input("Create a new file with the name of the image, and insert its Path here. Add '/' to the end, if you are working on a mac, and '\' if you are working on windows : (All the resulting files will be saved in it)"))
-    plt.savefig(pathx + "plot.jpg")
+    plt.savefig(pathx + "plot.svg")
     plt.show()
     dataFrame.to_csv(pathx + "data.csv")
-# #     intensity3 = aver_ch_intensity3(listCenters[70][0], listCenters[70][1], 10, pixelarray)
-    draw_centers(listCenters, file_name, bgloc, pathx)
+    draw_centers(listCenters, file_name, bgloc, pathx, bgradius, chamberradius)
 
 
 main()

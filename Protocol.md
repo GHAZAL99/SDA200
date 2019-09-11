@@ -21,16 +21,97 @@ _Note: The method above applies to all the steps below._
 
 2.	Use the **p20 micropipette**, set at **3 µL** to inject water in the **INLET** of the device. Keep injecting water (you can press beyond the first stop) till the water reaches the **first mark** following the inlet. *Look at the image below to see the correct amount of water needed.*                          
 __*Note: Make sure no air is present at the inlet area.*__
->![Water filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%201.jpg?token=AHPXAYI6ZYIMMGH7JKAO4D25OAOAW)    
+>Water Filling Image:![Water filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%201.jpg?token=AHPXAYI6ZYIMMGH7JKAO4D25OAOAW "Water filling")
 
 3.  Use the **p200 micropipette**, set at **50 µL**, to inject **Crystal Violet** in the **INLET** of the device. To do so, press the micropipette to the first stop, and keep pressing till the CV/water fills all the chambers and before it gets into the outlet area.
->![Dye filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%202.jpg?token=AHPXAYOMW7LASDG5POCJFHC5OAN6U)
+>Dye Filling Image:![Dye filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%202.jpg?token=AHPXAYOMW7LASDG5POCJFHC5OAN6U "Dye filling")
 
 4.	Use the **p200 micropipette**, set at **50 µL**, to inject **Novec oil** in the **OUTLET** of the device. To do so, press the micropipette to the first stop, **DO NOT RELEASE** your thumb until most of the crystal violet/water and the air present at the inlet area is pushed out. Use Kimwipes to absorb the liquid that comes out of the device.
->![Oil filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%203.jpg?token=AHPXAYN4NXF4GXRCKYBMXDS5OAOCO)
+>Oil Filling Image:![Oil filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%203.jpg?token=AHPXAYN4NXF4GXRCKYBMXDS5OAOCO "Oil filling")
 
-5. If you notice air pushing the oil out of the channels, inject more oil from the **OUTLET**, the same way you did in step 4.
+5. If you notice air pushing the oil out of the channels, inject more oil from the **OUTLET**, the same way you did in step
 
 6. Cover the device using a glass slide, and use tape to make sure the inlets are blocked.
 
 ## Protocol for using Analyzing Gradient script:
+
+#### Finding the coordinates of a pixel on an Image:
+*We recommend using ImageJ for finding the coordinates of pixels.*
+
+1. Download a software that allows you to get the coordinates of pixels in an image. Use the following link and follow these instructions to download and install ImageJ: [Download ImageJ](https://serc.carleton.edu/earth_analysis/image_analysis/download_install_imageJ.html "ImageJ")
+
+2. Open the image of your SDA200 using the chosen software.
+
+3. For ImageJ, hover your mouse pointer over a chosen pixel to get the x, y coordinates.
+
+4. Use the following image to locate the chambers in (5).
+>Image of the Samples: ![Numbered chambers](Samples.jpg "Chambers with indices")
+The small red circles in this image are the background sample areas, while the bigger red circles are the chamber sample areas.
+
+5. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br> *x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6* <br>
+Chambers:
+>* 1
+>* 21
+>* 20
+>* 161
+>* 40
+>* 191
+*Note: It is recommended that you save the coordinate values with the name of the file in a separate file.*
+
+### Analyzing the filled SDA200:
+*This section will walk you through how to use the script*
+1. Run the latest Analyzing gradient python file present in the repository.
+
+2. When the following statement is printed, insert the Path of your image with the extention (i.e.: .jpg)
+>Write file name with extension: (ex: .jpg)
+
+3. You will be given instructions on how to insert the coordinates of the centers of the chambers. Paste the coordinates, following "Centers:", that you recorded in step 5 of the previous section "Finding the coordinates of a pixel on an Image".
+>Enter the following values separated by a comma (,), in the following order (TIP: save them on a separate file):<br>
+1-centerx1: Type the x-axis value of the center of 1st chamber of the device<br>
+2-centery1: Type the y-axis value of the center of the 1st chamber of the device<br>
+3-centerx2: Type the x-axis value of the center of the 21st chamber of the device (1st chamber of the second row from the right)<br>
+4-centery2: Type the y-axis value of the center of the 21st chamber of the device (1st chamber of the 2nd row from the right)<br>
+5-srow1x: Type the x-axis value of the center of the 20th chamber of the device (Last chamber of the 1st row)<br>
+6-srow1y: Type the y-axis value of the center of the 20th chamber of the device (Last chamber of the 1st row)<br>
+7-scol1x: Type the x-axis value of the center of the 9th chamber of the 1st column (from the left):<br>
+8-scol1y: Type the y-axis value of the center of the 9th chamber of the 1st column (from the left):<br>
+9-srow2x: Type the x-axis value of the center of the 1st chamber of the 2nd row (from the right):<br>
+10-srow2y: Type the y-axis value of the center of the 1st chamber of the 2nd row (from the right):<br>
+11-scol2x: Type the x-axis value of the center of the 10th chamber of the last column (from the left):<br>
+12-scol2y: Type the y-axis value of the center of the 10th chamber of the last column (from the left):<br>
+>Template: Centers: centerx1, centery1, centerx2, centery2, srow1x, srow1y, scol1x, scol1y, srow2x, sorw2y, scol2x, scol2y<br>
+>
+>Centers:
+
+4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated using #############(Microscope name), we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**.
+>Background samples are used to normalize the intensity with the background
+Insert the distance between the background sample and the center of the chamber. Type 0 or 12 for default (12 pixels).
+Background sample distance from center of the chamber:
+
+*Note: More information about the normalization process can be found in "The normalization of the intensities:" section.*
+
+5. Insert the background sample radius of your choice, we used 2 pixels radius for our images.
+>Background sample radius in pixels (2 pixels is recommended):
+
+6.Insert the Chamber sample radius, we used 5 pixels radius for our images.
+>Chamber sample radius in pixels (5 pixels is recommended):
+
+7. The first and last 30 values of intensities will be printed automatically. Nothing should be done.
+
+8. You will need to **create a file**, where you would like to have your results saved in. You will get **data.csv** file containing the intensity values, a **plot.svg** containing an image of the plot of the intensities VS indices and a **Samples.jpg** showing the indices of the chambers, and the Background and chamber sample areas. <br>
+Paste the **path of the file** you created when prompted.
+
+>Create a new file with the name of the image, and insert its Path here. Add '/' to the end, if you are working on a mac, and '' if you are working on windows : (All the resulting files will be saved in it)
+
+9. You will see the output of your plot.
+
+##### The normalization of the intensities:
+1. Take the maximal intensities of all the background samples. Calculate the average maximal intensity.
+
+2. For each chamber, calculate the **average inensity of each** droplet, while removing all pixels that are suspected to not be part of the droplet (you can find how the filtering of these pixels is done in the "Removing pixels that are not part of the droplet" section).
+
+3. For each chamber, calculate the **intensity variation** caused by lighting, by dividing the maximal intensity of the background sample by the average maximal background intensities. **"coefficient of variation"** = 2 - **intensity variation**
+
+4. Finally, multiply the **average intensity of each droplet** with its respective **"coefficient of variation"**.
+
+##### Removing pixels that are not part of the droplet:
