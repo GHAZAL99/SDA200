@@ -48,14 +48,17 @@ __*Note: Make sure no air is present at the inlet area.*__
 >Image of the Samples: ![Numbered chambers](Samples.jpg "Chambers with indices")
 The small red circles in this image are the background sample areas, while the bigger red circles are the chamber sample areas.
 
-5. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br> *x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6* <br>
+5. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br>
+> *x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6* <br>
+
 Chambers:
->* 1
->* 21
->* 20
->* 161
->* 40
->* 191
+* 1
+* 21
+* 20
+* 161
+* 40
+* 191
+
 *Note: It is recommended that you save the coordinate values with the name of the file in a separate file.*
 
 ### Analyzing the filled SDA200:
@@ -64,6 +67,12 @@ Chambers:
 
 2. When the following statement is printed, insert the Path of your image with the extention (i.e.: .jpg)
 >Write file name with extension: (ex: .jpg)
+
+Windows example answer:
+ > C:\Users\USERNAME\Desktop\Microfluidics\IMAGENAME.jpg
+
+ Mac OS example answer:
+ >/Users/USERNAME/Desktop/Microfluidics/IMAGENAME.jpg
 
 3. You will be given instructions on how to insert the coordinates of the centers of the chambers. Paste the coordinates, following "Centers:", that you recorded in step 5 of the previous section "Finding the coordinates of a pixel on an Image".
 >Enter the following values separated by a comma (,), in the following order (TIP: save them on a separate file):<br>
@@ -83,17 +92,20 @@ Chambers:
 >
 >Centers:
 
-4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated using #############(Microscope name), we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**.
+ Example answer:
+>243,362,1216,418,1214,380,236,670,246,400,1210,722
+
+4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated using #############(Microscope name), we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**. When prompted, insert the background sample distance (must be an integer).
 >Background samples are used to normalize the intensity with the background
 Insert the distance between the background sample and the center of the chamber. Type 0 or 12 for default (12 pixels).
 Background sample distance from center of the chamber:
 
 *Note: More information about the normalization process can be found in "The normalization of the intensities:" section.*
 
-5. Insert the background sample radius of your choice, we used 2 pixels radius for our images.
+5. Insert the background sample radius of your choice, we used 2 pixels radius for our images (must be an integer).
 >Background sample radius in pixels (2 pixels is recommended):
 
-6.Insert the Chamber sample radius, we used 5 pixels radius for our images.
+6.Insert the Chamber sample radius, we used 5 pixels radius for our images (must be an integer).
 >Chamber sample radius in pixels (5 pixels is recommended):
 
 7. The first and last 30 values of intensities will be printed automatically. Nothing should be done.
@@ -101,17 +113,32 @@ Background sample distance from center of the chamber:
 8. You will need to **create a file**, where you would like to have your results saved in. You will get **data.csv** file containing the intensity values, a **plot.svg** containing an image of the plot of the intensities VS indices and a **Samples.jpg** showing the indices of the chambers, and the Background and chamber sample areas. <br>
 Paste the **path of the file** you created when prompted.
 
->Create a new file with the name of the image, and insert its Path here. Add '/' to the end, if you are working on a mac, and '' if you are working on windows : (All the resulting files will be saved in it)
+>Create a new file with the name of the image, and insert its Path here. Add '/ ' to the end, if you are working on a mac, and  ' \ ' if you are working on windows : (All the resulting files will be saved in it)
+
+Windows example:
+> C:\Users\USERNAME\Desktop\Microfluidics\FOLDERNAME\
+
+Mac OS example:
+> /Users/USERNAME/Desktop/Microfluidics/FOLDERNAME/
 
 9. You will see the output of your plot.
+>Example image of the output plot: ![plot](plot.jpg "Intensity vs Chamber Indices ")
 
 ##### The normalization of the intensities:
-1. Take the maximal intensities of all the background samples. Calculate the average maximal intensity.
+1. The script takes the maximal intensities of all the background samples and calculates the average maximal intensity.
 
-2. For each chamber, calculate the **average inensity of each** droplet, while removing all pixels that are suspected to not be part of the droplet (you can find how the filtering of these pixels is done in the "Removing pixels that are not part of the droplet" section).
+2. For each chamber, the script calculates the **average inensity of each** droplet, while removing all pixels that are suspected to not be part of the droplet (you can find how the filtering of these pixels is done in the "Removing pixels that are not part of the droplet" section).
 
-3. For each chamber, calculate the **intensity variation** caused by lighting, by dividing the maximal intensity of the background sample by the average maximal background intensities. **"coefficient of variation"** = 2 - **intensity variation**
+3. For each chamber, the program calculates the **intensity variation** caused by lighting, by dividing the maximal intensity of the background sample by the average maximal background intensities. **"coefficient of variation"** = 2 - **intensity variation**
 
-4. Finally, multiply the **average intensity of each droplet** with its respective **"coefficient of variation"**.
+4. Finally, the code multiplies the **average intensity of each droplet** with its respective **"coefficient of variation"**.
 
 ##### Removing pixels that are not part of the droplet:
+The following steps are followed by the script to eliminate pixels that are not part of the droplet:
+1. After finding the pixels of the chamber sample, the standard deviation of the intensities of the pixels is calculated.
+
+2. If the standard deviation of a chamber sample is above 4, then the script considers that the sample is suspicious, it potentially contains one or more pixels that are not part of the droplet.
+
+3.  The intensities of the pixels of suspicious samples are then compared with the background sample maximal intensity. If the difference between the two intensities is less than 60, then the pixel's intensity is discarded.
+
+4. If more than half the intensities are disregarded, then the whole chamber sample is discarded.

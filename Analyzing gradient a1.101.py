@@ -260,8 +260,6 @@ def main():
     #listCenters = select_centers(225,400,1193,448,1188,410,225,706,229,434,1192,760) #Snap - 178
     #listCenters = select_centers(243,362,1216,418,1214,380,236,670,246,400,1210,722) #Snap - 189
     #listCenters = select_centers(243,362,1216,418,1214,380,236,670,246,400,1210,722) #Snap - 189
-    #C:\Users\Nabil Ghazal\Desktop\Opijnen\Microfluidics\8-1-19\Snap-189.jpg
-    #C:\Users\Nabil Ghazal\Desktop\Opijnen\Microfluidics\8-1-19\Snap-189\
     #bgloc: choose the distance of the bg area from the center of the droplet
     while True:
         try:
@@ -291,6 +289,7 @@ def main():
     for center in listCenters:
         bgintensity, maximal = aver_ch_intensity_bg((center[0] - bgloc ), (center[1] + bgloc), bgradius, pixelarray)
         listavbg.append(maximal)
+    stdbg = np.std(listavbg)
     bgmean = np.mean(listavbg) #average maximal background intensity
     chamberList = []
     centerCoordinates = []
