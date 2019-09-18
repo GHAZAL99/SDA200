@@ -299,23 +299,35 @@ def main():
     coefficientList = [] #List of the variation of the bg of the droplet from the mean
     for center in listCenters:
         bgintensity, maximal = aver_ch_intensity_bg((center[0] - bgloc ), (center[1] + bgloc), bgradius, pixelarray)
-        coefficient = 2 - float(maximal/bgmean) #variation of the bg of the droplet from the mean
+        zscore = (maximal - bgmean)/stdbg
         intensity1 = aver_ch_intensity(center[0], center[1], chamberradius, pixelarray, maximal)
-        intensity = float(intensity1) * coefficient
+        coefficient = 2 - float(maximal/bgmean) #variation of the bg of the droplet from the mean
+        ratio = intensity1 / maximal 
+        if ratio <= 0.75:
+            ratio = 0.2
+        if coefficient < 1:
+            mod = (1 - coefficient) * ratio
+            fincoef = 1 - mod
+        else:
+            mod = (coefficient - 1) * ratio
+            fincoef = 1 + mod
+        intensity = float(intensity1) * (fincoef)
         if intensity != 0:
             chamberList.append(chambern)
             centerCoordinates.append(str(center))
             normIntensityList.append(intensity)
             intensityList.append(intensity1)
             maximalList.append(maximal)
-            coefficientList.append(coefficient)
+            coefficientList.append(fincoef)
             #print(str(chambern) +" "+ str(center) + " " + str( intensity) + " " + str(intensity1)+ " " + str(maximal) + " " + str(coefficient))#Intensity
         chambern += 1
     dataFrame = pd.DataFrame({"Chamber": chamberList,
                               "Center": centerCoordinates,
-                              "Intensity": normIntensityList}) #Normalized Intensity
+                              "Normalized Intensity": normIntensityList,
+                              "Unnormalized Intensity": intensityList,
+                              "Background Intensity": maximalList}) 
     print(dataFrame)
-    dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Intensity")
+    dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Normalized Intensity")
     dataFrame.set_index("Chamber",inplace=True, drop=True)
     pathx = str(input("Create a new file with the name of the image, and insert its Path here. Add '/' to the end, if you are working on a mac, and '\' if you are working on windows : (All the resulting files will be saved in it)"))
     plt.savefig(pathx + "plot.svg")

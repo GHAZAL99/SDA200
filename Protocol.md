@@ -15,6 +15,17 @@
 
 _Note: The method above applies to all the steps below._
 
+#### Taking images of the SDA200:
+To take images if the SDA200, we used :
+* Microscope: Zeiss Stereo Discovery.V8
+* Objective: Plan S 1.0x FWD 81mm
+* Camera: AxioCam MRc
+* Software: ZEN 2.3 lite
+* Light Pad  
+
+The SDA200 was placed on a Light Pad placed under the objective of the microscope. The light pad was set to its second brightness. After adjusting the focus of the microscope in a way to be able to see the whole SDA200 device, we set the Exposure on the ZEN software to be 250.0 ms and the intensity to be 105%.
+
+
 ### Section 2: Filling the SDA200 device:
 
 1.	Get 3 Eppendorf tubes. Assign each tube to one of the following liquids: Crystal Violet, Novec oil and water. Place around 0.5 mL of each liquid in its corresponding tube.
@@ -95,7 +106,7 @@ Windows example answer:
  Example answer:
 >243,362,1216,418,1214,380,236,670,246,400,1210,722
 
-4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated using #############(Microscope name), we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**. When prompted, insert the background sample distance (must be an integer).
+4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated, we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**. When prompted, insert the background sample distance (must be an integer).
 >Background samples are used to normalize the intensity with the background
 Insert the distance between the background sample and the center of the chamber. Type 0 or 12 for default (12 pixels).
 Background sample distance from center of the chamber:
