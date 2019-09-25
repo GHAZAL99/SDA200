@@ -304,7 +304,7 @@ def main():
         coefficient = 2 - float(maximal/bgmean) #variation of the bg of the droplet from the mean
         ratio = intensity1 / maximal 
         if ratio <= 0.75:
-            ratio = 0.2
+            ratio = 0.001
         if coefficient < 1:
             mod = (1 - coefficient) * ratio
             fincoef = 1 - mod

@@ -57,7 +57,7 @@ __*Note: Make sure no air is present at the inlet area.*__
 
 4. Use the following image to locate the chambers in (5).
 >Image of the Samples: ![Numbered chambers](Samples.jpg "Chambers with indices")
-The small red circles in this image are the background sample areas, while the bigger red circles are the chamber sample areas.
+The small red circles in this image are the background sample areas, while the bigger red circles are the chamber sample areas. *Note: this example does not have a gradient.*
 
 5. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br>
 > *x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6* <br>
@@ -80,10 +80,10 @@ Chambers:
 >Write file name with extension: (ex: .jpg)
 
 Windows example answer:
- > C:\Users\USERNAME\Desktop\Microfluidics\IMAGENAME.jpg
+ > C:\Users\USERNAME\Desktop\Microfluidics\Snap-178.jpg
 
  Mac OS example answer:
- >/Users/USERNAME/Desktop/Microfluidics/IMAGENAME.jpg
+ >/Users/USERNAME/Desktop/Microfluidics/Snap-178.jpg
 
 3. You will be given instructions on how to insert the coordinates of the centers of the chambers. Paste the coordinates, following "Centers:", that you recorded in step 5 of the previous section "Finding the coordinates of a pixel on an Image".
 >Enter the following values separated by a comma (,), in the following order (TIP: save them on a separate file):<br>
@@ -104,7 +104,7 @@ Windows example answer:
 >Centers:
 
  Example answer:
->243,362,1216,418,1214,380,236,670,246,400,1210,722
+>225,400,1193,448,1188,410,225,706,229,434,1192,760
 
 4. Background samples are an area of pixels located to the **bottom left of each chamber** (the smaller circles in "Image of the Samples"). The pixel with the maximal intensity will be chosen to normalize the intensity of the chamber with the background, and reduce the effect of the unequal lighting of the device. You will be prompted to insert a number, that will be used as **the distance (in pixels) between the center of the chamber and the center of the background sample**. For the images we generated, we used 12 pixels. Use ImageJ to estimate the distance that you want the Background Sample to be at, so that the area is **outside the chambers and the channels**. When prompted, insert the background sample distance (must be an integer).
 >Background samples are used to normalize the intensity with the background
@@ -127,13 +127,13 @@ Paste the **path of the file** you created when prompted.
 >Create a new file with the name of the image, and insert its Path here. Add '/ ' to the end, if you are working on a mac, and  ' \ ' if you are working on windows : (All the resulting files will be saved in it)
 
 Windows example:
-> C:\Users\USERNAME\Desktop\Microfluidics\FOLDERNAME\
+> C:\Users\USERNAME\Desktop\Microfluidics\Snap-178\
 
 Mac OS example:
-> /Users/USERNAME/Desktop/Microfluidics/FOLDERNAME/
+> /Users/USERNAME/Desktop/Microfluidics/Snap-178/
 
 9. You will see the output of your plot.
->Example image of the output plot: ![plot](plot.jpg "Intensity vs Chamber Indices ")
+>Example image of the output plot: ![plot](Snap178plot.png "Intensity vs Chamber Indices ")
 
 ##### The normalization of the intensities:
 1. The script takes the maximal intensities of all the background samples and calculates the average maximal intensity.
@@ -148,8 +148,13 @@ Mac OS example:
 The following steps are followed by the script to eliminate pixels that are not part of the droplet:
 1. After finding the pixels of the chamber sample, the standard deviation of the intensities of the pixels is calculated.
 
-2. If the standard deviation of a chamber sample is above 4, then the script considers that the sample is suspicious, it potentially contains one or more pixels that are not part of the droplet.
+2. If the standard deviation of a chamber sample is above 4, then the script considers that the sample is not completely filled, it potentially contains one or more pixels that are not part of the droplet.
 
-3.  The intensities of the pixels of suspicious samples are then compared with the background sample maximal intensity. If the difference between the two intensities is less than 60, then the pixel's intensity is discarded.
+3.  The intensities of the pixels of not completely filled samples are then compared with the background sample maximal intensity. If the difference between the two intensities is less than 60, then the pixel's intensity is discarded.
 
 4. If more than half the intensities are disregarded, then the whole chamber sample is discarded.
+>Example:
+  * In the image below, the droplet in the green square may need to have a very small amount of its pixels disregarded.
+  * The droplet in the yellow square will have most of its pixels disregarded, and it the number of pixels available at the is less than half the original amount of pixels, the droplet will be discarded.
+  * Finally, the chamber in the red square was not filled at all. Thus it will be discarded if its pixels have a standard deviation greater than 4.
+>![Droplet types](DropType.jpeg "Filled and unfilled droplets")
