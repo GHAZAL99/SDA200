@@ -14,6 +14,7 @@ This is a temporary script file.
 from PIL import Image, ImageDraw
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 height = 0  #height of the image
 width = 0   #width of the image
@@ -323,13 +324,25 @@ def main():
             coefficientList.append(fincoef)
             #print(str(chambern) +" "+ str(center) + " " + str( intensity) + " " + str(intensity1)+ " " + str(maximal) + " " + str(coefficient))#Intensity
         chambern += 1
+    X = np.asarray(chamberList).reshape(-1,1)
+    Y = np.asarray(intensityList)
+    linearBrt = LinearRegression().fit(X,Y)###
+    linearList = linearBrt.predict(X)
+    
     dataFrame = pd.DataFrame({"Chamber": chamberList,
                               "Center": centerCoordinates,
+                              "Linear Intensity": linearList,
                               "Normalized Intensity": normIntensityList,
                               "Unnormalized Intensity": intensityList,
                               "Background Intensity": maximalList}) 
     print(dataFrame)
-    dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Normalized Intensity")
+   
+        
+        
+    #dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Normalized Intensity")
+    #dataPlot2 = dataFrame.plot.line(x ="Chamber", y ="Linear Intensity")
+    plt.scatter(x ="Chamber", y ="Normalized Intensity", data = dataFrame, color = "skyblue")
+    plt.plot("Chamber", "Linear Intensity", data = dataFrame, color = "red")
     dataFrame.set_index("Chamber",inplace=True, drop=True)
     pathx = str(input("Create a new file with the name of the image, and insert its Path here. Add '/' to the end, if you are working on a mac, and '\' if you are working on windows : (All the resulting files will be saved in it)"))
     plt.savefig(pathx + "plot.svg")
