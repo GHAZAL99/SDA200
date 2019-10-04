@@ -4,7 +4,7 @@
 2. Tape the glass slides tightly to the PDMS.
 3.Place the chip inside a tip box and fill the latter with enough deionized water so that the chip is immersed in water.
 4.	Incubate the chip at 37 ̊ C overnight. (Don’t leave it for a longer time, as this may get water inside the devices.)
-5.	Use the device immediately after taking it out of the water.
+5.	Use the device immediately after taking it out of the water. But first, make sure no water is present in the inlets/outlets, by trying to cuck any water out using the p200 micropipette and gel loading tips. *Tip: start by sucking the liquid out of the inlets/outlets present near the edges first.*
 
 *Note: The steps above are recommended to reduce the evaporation of the liquids in the device. If the evaporation is not an issue, you can skip this section.*
 
@@ -45,21 +45,29 @@ __*Note: Make sure no air is present at the inlet area.*__
 6. Cover the device using a glass slide, and use tape to make sure the inlets are blocked.
 
 ## Protocol for using Analyzing Gradient script:
+#### Required Software:
+* It is necessary to download the following programs to analyze your gradient:
+  * Python 3.x.x is necessary to run the Analyzing Gradient script. Press on the following link if you don't have it already installed: [Download Python](https://www.python.org/downloads/ "Python").
+  * You also need to install the following libraries:
+    *  [Pillow (image editing library)](https://pillow.readthedocs.io/en/stable/installation.html "Pillow")
+    * [matplotlib](https://matplotlib.org/users/installing.html "matplotlib")
+    * [pandas](https://pandas.pydata.org/ "pandas")
+    * [numpy](https://scipy.org/install.html "numpy")
+    * [scikit-learn](https://scikit-learn.org/stable/install.html "scikit")
+  * Download a software that allows you to get the coordinates of pixels in an image. Our lab used ImageJ for this task. [Download ImageJ here.](https://serc.carleton.edu/earth_analysis/image_analysis/download_install_imageJ.html "ImageJ")
 
 #### Finding the coordinates of a pixel on an Image:
 *We recommend using ImageJ for finding the coordinates of pixels.*
 
-1. Download a software that allows you to get the coordinates of pixels in an image. Use the following link and follow these instructions to download and install ImageJ: [Download ImageJ](https://serc.carleton.edu/earth_analysis/image_analysis/download_install_imageJ.html "ImageJ")
+1. Open the image of your SDA200 using the chosen software.
 
-2. Open the image of your SDA200 using the chosen software.
+2. For ImageJ, hover your mouse pointer over a chosen pixel to get the x, y coordinates.
 
-3. For ImageJ, hover your mouse pointer over a chosen pixel to get the x, y coordinates.
-
-4. Use the following image to locate the chambers in (5).
+3. Use the following image to locate the chambers in (5).
 >Image of the Samples: ![Numbered chambers](Samples.jpg "Chambers with indices")
 The small red circles in this image are the background sample areas, while the bigger red circles are the chamber sample areas. *Note: this example does not have a gradient.*
 
-5. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br>
+4. Hover over the centers of the listed chambers below in their respective order, and record the coordinates of their **centers** in the following format: <br>
 > *x1,y1,x2,y2,x3,y3,x4,y4,x5,y5,x6,y6* <br>
 
 Chambers:
@@ -133,9 +141,11 @@ Mac OS example:
 > /Users/USERNAME/Desktop/Microfluidics/Snap-178/
 
 9. You will see the output of your plot.
->Example image of the output plot: ![plot](Snap178plot.png "Intensity vs Chamber Indices ")
+>Example image of the output plot: ![plot](Snap178/plot.png "Intensity vs Chamber Indices ")
 
 ##### The normalization of the intensities:
+###### Original Method:
+
 1. The script takes the maximal intensities of all the background samples and calculates the average maximal intensity.
 
 2. For each chamber, the script calculates the **average inensity of each** droplet, while removing all pixels that are suspected to not be part of the droplet (you can find how the filtering of these pixels is done in the "Removing pixels that are not part of the droplet" section).
@@ -143,6 +153,10 @@ Mac OS example:
 3. For each chamber, the program calculates the **intensity variation** caused by lighting, by dividing the maximal intensity of the background sample by the average maximal background intensities. **"coefficient of variation"** = 2 - **intensity variation**
 
 4. Finally, the code multiplies the **average intensity of each droplet** with its respective **"coefficient of variation"**.
+
+###### Simpler method (doesn't use background intensity):
+
+We used the [*LinearRegression* function](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html "LinearRegression") of sklearn.linear_model to find a linear function. The **linear function** and the **unnormalized intensity** values are displayed on the plot. The **equation of the linear function and the R squared value** of the linear regression are both in the **.csv file** and on the **plot**.
 
 ##### Removing pixels that are not part of the droplet:
 The following steps are followed by the script to eliminate pixels that are not part of the droplet:
@@ -157,4 +171,4 @@ The following steps are followed by the script to eliminate pixels that are not 
   * In the image below, the droplet in the green square may need to have a very small amount of its pixels disregarded.
   * The droplet in the yellow square will have most of its pixels disregarded, and it the number of pixels available at the is less than half the original amount of pixels, the droplet will be discarded.
   * Finally, the chamber in the red square was not filled at all. Thus it will be discarded if its pixels have a standard deviation greater than 4.
->![Droplet types](DropType.jpeg "Filled and unfilled droplets")
+>![Droplet types](DropType.jpg "Filled and unfilled droplets")
