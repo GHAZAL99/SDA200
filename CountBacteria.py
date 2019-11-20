@@ -76,7 +76,6 @@ def main():
         pixelarray = load_image(pathfile)
         for row in pixelarray:
             for col in row:
-                
                 if int(col[0]) < 188 and int(col[0]) > 60 and int(col[1]) < 188 and int(col[1]) > 60 and int(col[2]) < 188 and int(col[2]) > 60:
                #if col < 200 :
                     count =  count +1
