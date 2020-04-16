@@ -172,7 +172,7 @@ def aver_ch_intensity(centerx, centery, radius, pixelarray, bgintensity):
     if std >= 4 :
         intenscopy = intensityList[:]
         for intens in intenscopy:
-            if (bgintensity - intens) <= 60:
+            if (0 - intens) >= -60 or (0 - intens) <= 60: #########CHANGE
                 intensityList.remove(intens)
     size = len(intensityList)
     if size < 39: #if size is smaller than half
@@ -196,7 +196,7 @@ def draw_centers(listcenters, image, bgloc, pathx, bgradius, chamberradius):
             print("Unable to load Image")
     d = ImageDraw.Draw(device)
     chambern = 1
-    d.point(listcenters, fill= "BLACK")
+    d.point(listcenters, fill= "WHITE")
     for center in listcenters:
         d.text(((center[0] - 25), (center[1] - 25)), str(chambern),fill = 50)
         d.ellipse(((center[0] - chamberradius), (center[1] - chamberradius), (center[0] + chamberradius), (center[1] + chamberradius)), fill = 128)
@@ -273,25 +273,26 @@ def main():
     #listCenters = select_centers(225,400,1193,448,1188,410,225,706,229,434,1192,760) #Snap - 178
     #listCenters = select_centers(243,362,1216,418,1214,380,236,670,246,400,1210,722) #Snap - 189
     #listCenters = select_centers(243,362,1216,418,1214,380,236,670,246,400,1210,722) #Snap - 189
-    #listCenters = select_centers(120,142,1732,162,1725,98,130,665,125,202,1749,682) #Snap - 189
+    #listCenters = select_centers(120,142,1732,162,1725,98,130,665,125,202,1749,682) #edited1   (fluorescent)
+#C:\Users\Nabil Ghazal\Desktop\Opijnen\Microfluidics\2020\2-6-2020\edited1
     #bgloc: choose the distance of the bg area from the center of the droplet
     while True:
         try:
             print("Background samples are used to normalize the intensity with the background")
-            print("Insert the distance between the background sample and the center of the chamber. Type 0 or 12 for default (12 pixels).")
+            print("Insert the distance between the background sample and the center of the chamber. Type 0 or 30 for default (12 pixels).")
             bgloc = int(input("Background sample distance from center of the chamber:"))
             break
         except:
             print("Make sure to enter an Integer:")
     while True:
         try:
-            bgradius = int(input("Background sample radius in pixels (2 pixels is recommended):"))
+            bgradius = int(input("Background sample radius in pixels (3 pixels is recommended):"))
             break
         except:
             print("Make sure to enter an Integer:")
     while True:
         try:
-            chamberradius = int(input("Chamber sample radius in pixels (5 pixels is recommended):"))
+            chamberradius = int(input("Chamber sample radius in pixels (7 pixels is recommended):"))
             break
         except:
             print("Make sure to enter an Integer:")
@@ -351,7 +352,7 @@ def main():
         
     #dataPlot = dataFrame.plot.scatter(x ="Chamber", y ="Normalized Intensity")
     #dataPlot2 = dataFrame.plot.line(x ="Chamber", y ="Linear Intensity")
-    plt.scatter(x ="Chamber", y ="Normalized Intensity", data = dataFrame, color = "skyblue")
+    plt.scatter(x ="Chamber", y ="Unnormalized Intensity", data = dataFrame, color = "skyblue")
     plt.plot("Chamber", "Linear Intensity", data = dataFrame, color = "red")
     plt.xlabel("Chamber Number")
     plt.ylabel("Intensity")
