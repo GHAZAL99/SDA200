@@ -88,10 +88,10 @@ Chambers:
 >Write file name with extension: (ex: .jpg)
 
 Windows example answer:
- > C:\Users\USERNAME\Desktop\Microfluidics\Snap-178.jpg
+>C:\Users\USERNAME\Desktop\Microfluidics\Snap-178.jpg
 
- Mac OS example answer:
- >/Users/USERNAME/Desktop/Microfluidics/Snap-178.jpg
+Mac OS example answer:
+>/Users/USERNAME/Desktop/Microfluidics/Snap-178.jpg
 
 3. You will be given instructions on how to insert the coordinates of the centers of the chambers. Paste the coordinates, following "Centers:", that you recorded in step 5 of the previous section "Finding the coordinates of a pixel on an Image".
 >Enter the following values separated by a comma (,), in the following order (TIP: save them on a separate file):<br>
@@ -119,7 +119,7 @@ Windows example answer:
 Insert the distance between the background sample and the center of the chamber. Type 0 or 12 for default (12 pixels).
 Background sample distance from center of the chamber:
 
-*Note: More information about the normalization process can be found in "The normalization of the intensities:" section.*
+* Note: More information about the normalization process can be found in "The normalization of the intensities:" section.*
 
 5. Insert the background sample radius of your choice, we used 2 pixels radius for our images (must be an integer).
 >Background sample radius in pixels (2 pixels is recommended):
@@ -133,13 +133,13 @@ Background sample distance from center of the chamber:
 >otherwise enter any other number:
 
 8. The following steps only apply if you typed one on step 7:
- * Insert the average brightness of the chambers of the non-gradient colored solution filled device
+    * Insert the average brightness of the chambers of the non-gradient colored solution filled device
 >Enter the average brightness of the chambers in the non-gradient control colored solution:
- * Insert the average brightness of the chambers of the non-gradient dilutant filled device
+    * Insert the average brightness of the chambers of the non-gradient dilutant filled device
 >Enter the brightness of the solution in the last (most diluted) chamber: (if water is the diluent, it will be the brightness of the water)
- *Type in the concentration of the undiluted stock solution
+    * Type in the concentration of the undiluted stock solution
 >Enter the concentration of the undiluted solution in the control device:
- *Type in the concentration of the diluting solution
+    * Type in the concentration of the diluting solution
 >Enter the concentration of the diluting solution in the control device:
 
 8. The first and last 30 values of intensities will be printed automatically. Nothing should be done.
@@ -183,7 +183,7 @@ The following steps are followed by the script to eliminate pixels that are not 
 
 4. If more than half the intensities are disregarded, then the whole chamber sample is discarded.
 >Example:
-  * In the image below, the droplet in the green square may need to have a very small amount of its pixels disregarded.
-  * The droplet in the yellow square will have most of its pixels disregarded, and it the number of pixels available at the is less than half the original amount of pixels, the droplet will be discarded.
-  * Finally, the chamber in the red square was not filled at all. Thus it will be discarded if its pixels have a standard deviation greater than 4.
+    * In the image below, the droplet in the green square may need to have a very small amount of its pixels disregarded.
+    * The droplet in the yellow square will have most of its pixels disregarded, and it the number of pixels available at the is less than half the original amount of pixels, the droplet will be discarded.
+    * Finally, the chamber in the red square was not filled at all. Thus it will be discarded if its pixels have a standard deviation greater than 4.
 >![Droplet types](DropType.jpg "Filled and unfilled droplets")
