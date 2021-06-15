@@ -2,14 +2,14 @@
 ### Section 1: Reducing the evaporation of the liquids inside the device:
 1. Take the chip that you would like to use, and cover its devices with glass slides. (To block the inlets and outlets).
 2. Tape the glass slides tightly to the PDMS.
-3.Place the chip inside a tip box and fill the latter with enough deionized water so that the chip is immersed in water.
-4.	Incubate the chip at 37 ̊ C overnight. (Don’t leave it for a longer time, as this may get water inside the devices.)
-5.	Use the device immediately after taking it out of the water. But first, make sure no water is present in the inlets/outlets, by trying to cuck any water out using the p200 micropipette and gel loading tips. *Tip: start by sucking the liquid out of the inlets/outlets present near the edges first.*
+3. Place the chip inside a tip box and fill the latter with enough deionized water so that the chip is immersed in water.
+4. Incubate the chip at 37 ̊ C overnight. (Instead incubating the devices for a couple of hours before use may also work, more testing needs to be done for optimal time.)
+5. Use the device immediately after taking it out of the water. But first, make sure no water is present in the inlets/outlets, by trying to cuck any water out using the p200 micropipette and gel loading tips. *Tip: start by sucking the liquid out of the inlets/outlets present near the edges first.*
 
-*Note: The steps above are recommended to reduce the evaporation of the liquids in the device. If the evaporation is not an issue, you can skip this section.*
+*Note: The previous steps help reduce the evaporation that the droplets experience when incubated. Try to suck out any water present in the device (using micropipettes) before using the device.*
 
-##### Method for injecting liquids in PDMS:
-* Using both hands, gently insert the **gel loading tip** of the micropipette in the inlet/outlet. Start injecting the liquid **slowly**. If the solution escapes from the inlet/outlet, push the tip of the micropipette a little bit further in the inlet/outlet.
+##### Method for injecting liquids in PDMS (applies to all steps below):
+* Using both hands, gently insert the **gel loading tip** of the micropipette in the inlet/outlet. **[The tip should touch the bottom of the inlet]**. Start injecting the liquid **slowly**. If the solution escapes from the inlet/outlet, push the tip of the micropipette a little bit further in the inlet/outlet.
 
 * While removing, **gently** place a kimwipe around the inlet/outlet and **slowly** pull out the micropipette in the same way you injected it in, make sure to remove your thumb from the pump as the tip is moving out of the inlet/outlet. Keep using kimwipes to remove any liquid present at the inlet or outlet.
 
@@ -28,16 +28,16 @@ The SDA200 was placed on a Light Pad placed under the objective of the microscop
 
 ### Section 2: Filling the SDA200 device:
 
-1.	Get 3 Eppendorf tubes. Assign each tube to one of the following liquids: Crystal Violet, Novec oil and water. Place around 0.5 mL of each liquid in its corresponding tube.
+1.	Get 3 Eppendorf tubes. Assign each tube to one of the following liquids: Crystal Violet, 3M Novec 7500 oil and water. Place around 0.5 mL of each liquid in its corresponding tube.
 
-2.	Use the **p20 micropipette**, set at **3 µL** to inject water in the **INLET** of the device. Keep injecting water (you can press beyond the first stop) till the water reaches the **first mark** following the inlet. *Look at the image below to see the correct amount of water needed.*                          
+2.	Use the **p20 micropipette**, set at **3 µL** to inject water in the **INLET** of the device. Keep injecting water (you can press beyond the first stop) till the water reaches the **first mark** following the inlet. (The pipette tip should be wiped with kimwipes before inserting in the inlet. The tip should be inserted until it reaches the bottom of the inlet. Failure to do so would negatively impact the gradient.) *Look at the image below to see the correct amount of water needed.*                          
 __*Note: Make sure no air is present at the inlet area.*__
 >Water Filling Image:![Water filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%201.jpg?token=AHPXAYI6ZYIMMGH7JKAO4D25OAOAW "Water filling")
 
-3.  Use the **p200 micropipette**, set at **50 µL**, to inject **Crystal Violet** in the **INLET** of the device. To do so, press the micropipette to the first stop, and keep pressing till the CV/water fills all the chambers and before it gets into the outlet area.
+3.  Use the **p200 micropipette**, set at **50 µL**, to inject **Crystal Violet** in the **INLET** of the device. To do so, press the micropipette to the first stop, and keep pressing till the CV/water fills all the chambers and before it gets into the outlet area. (The pipette tip should be wiped with kimwipes before inserting in the inlet. The tip should be inserted until it reaches the bottom of the inlet.)
 >Dye Filling Image:![Dye filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%202.jpg?token=AHPXAYOMW7LASDG5POCJFHC5OAN6U "Dye filling")
 
-4.	Use the **p200 micropipette**, set at **50 µL**, to inject **Novec oil** in the **OUTLET** of the device. To do so, press the micropipette to the first stop, **DO NOT RELEASE** your thumb until most of the crystal violet/water and the air present at the inlet area is pushed out. Use Kimwipes to absorb the liquid that comes out of the device.
+4.	Use the **p200 micropipette**, set at **40 µL**, to inject **Novec oil** in the **OUTLET** of the device. To do so, press the micropipette to the first stop, **DO NOT RELEASE** your thumb until most of the crystal violet/water and the air present at the inlet area is pushed out. Use Kimwipes to absorb the liquid that comes out of the device.
 >Oil Filling Image:![Oil filling](https://raw.githubusercontent.com/GHAZAL99/SDA200/master/SDA%20200%203.jpg?token=AHPXAYN4NXF4GXRCKYBMXDS5OAOCO "Oil filling")
 
 5. If you notice air pushing the oil out of the channels, inject more oil from the **OUTLET**, the same way you did in step
@@ -49,7 +49,7 @@ __*Note: Make sure no air is present at the inlet area.*__
 * It is necessary to download the following programs to analyze your gradient:
   * Python 3.x.x is necessary to run the Analyzing Gradient script. Press on the following link if you don't have it already installed: [Download Python](https://www.python.org/downloads/ "Python").
   * You also need to install the following libraries:
-    *  [Pillow (image editing library)](https://pillow.readthedocs.io/en/stable/installation.html "Pillow")
+    * [Pillow (image editing library)](https://pillow.readthedocs.io/en/stable/installation.html "Pillow")
     * [matplotlib](https://matplotlib.org/users/installing.html "matplotlib")
     * [pandas](https://pandas.pydata.org/ "pandas")
     * [numpy](https://scipy.org/install.html "numpy")
@@ -124,12 +124,27 @@ Background sample distance from center of the chamber:
 5. Insert the background sample radius of your choice, we used 2 pixels radius for our images (must be an integer).
 >Background sample radius in pixels (2 pixels is recommended):
 
-6.Insert the Chamber sample radius, we used 5 pixels radius for our images (must be an integer).
+6. Insert the Chamber sample radius, we used 5 pixels radius for our images (must be an integer).
 >Chamber sample radius in pixels (5 pixels is recommended):
 
-7. The first and last 30 values of intensities will be printed automatically. Nothing should be done.
+7. You will be asked if you want to conver the brightness values to concentration values. To do so, you will need brightness values of a non-gradient control device filled with the colored solution and another one filled with just the dilutent (it is necessary to know the concentrations of both as well). If you would like to use this option, you shall type 1 when prompted with the message below, otherwise type any other number.
+>The following step requires having brightness values from a non-gradient control device filled with the colored solution and one filled with the diluent
+>Enter 1 if you wish to convert the light intensities to concentration values
+>otherwise enter any other number:
 
-8. You will need to **create a file**, where you would like to have your results saved in. You will get **data.csv** file containing the intensity values, a **plot.svg** containing an image of the plot of the intensities VS indices and a **Samples.jpg** showing the indices of the chambers, and the Background and chamber sample areas. <br>
+8. The following steps only apply if you typed one on step 7:
+ * Insert the average brightness of the chambers of the non-gradient colored solution filled device
+>Enter the average brightness of the chambers in the non-gradient control colored solution:
+ * Insert the average brightness of the chambers of the non-gradient dilutant filled device
+>Enter the brightness of the solution in the last (most diluted) chamber: (if water is the diluent, it will be the brightness of the water)
+ *Type in the concentration of the undiluted stock solution
+>Enter the concentration of the undiluted solution in the control device:
+ *Type in the concentration of the diluting solution
+>Enter the concentration of the diluting solution in the control device:
+
+8. The first and last 30 values of intensities will be printed automatically. Nothing should be done.
+
+9. You will need to **create a file**, where you would like to have your results saved in. You will get **data.csv** file containing the intensity values, a **plot.svg** containing an image of the plot of the intensities VS indices and a **Samples.jpg** showing the indices of the chambers, and the Background and chamber sample areas. <br>
 Paste the **path of the file** you created when prompted.
 
 >Create a new file with the name of the image, and insert its Path here. Add '/ ' to the end, if you are working on a mac, and  ' \ ' if you are working on windows : (All the resulting files will be saved in it)
@@ -140,11 +155,11 @@ Windows example:
 Mac OS example:
 > /Users/USERNAME/Desktop/Microfluidics/Snap-178/
 
-9. You will see the output of your plot.
+10. You will see the output of your plot.
 >Example image of the output plot: ![plot](Snap178/plot.png "Intensity vs Chamber Indices ")
 
 ##### The normalization of the intensities:
-###### Original Method:
+###### Main Method:
 
 1. The script takes the maximal intensities of all the background samples and calculates the average maximal intensity.
 
